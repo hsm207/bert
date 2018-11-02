@@ -249,6 +249,27 @@ class ColaProcessor(DataProcessor):
     return examples
 
 
+class ImdbProcessor(DataProcessor):
+  """Processor for the IMDB data set (custom)."""
+
+  def get_labels(self):
+    """See base class."""
+    return ["0", "1"]
+
+  def _create_examples(self, lines, set_type):
+    """Creates examples for the training and dev sets."""
+    examples = []
+    for (i, line) in enumerate(lines):
+      if i == 0:
+        continue
+      guid = "%s-%s" % (set_type, i)
+      text_a = tokenization.convert_to_unicode(line[1])
+      label = tokenization.convert_to_unicode(line[0])
+      examples.append(
+          InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
+    return examples
+
+
 def convert_examples_to_features(examples, label_list, max_seq_length,
                                  tokenizer):
   """Loads a data file into a list of `InputBatch`s."""
@@ -551,6 +572,7 @@ def main(_):
       "cola": ColaProcessor,
       "mnli": MnliProcessor,
       "mrpc": MrpcProcessor,
+      "imdb": ImdbProcessor,
   }
 
   if not FLAGS.do_train and not FLAGS.do_eval:
