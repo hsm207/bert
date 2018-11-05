@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-export BERT_BASE_DIR='checkpoints/uncased_L-12_H-768_A-12'
-export GLUE_DIR="$HOME/.data/glue_data"
+BERT_BASE_DIR='checkpoints/uncased_L-12_H-768_A-12'
+GLUE_DIR="$HOME/.data/glue_data"
 
 python run_classifier.py \
   --task_name=IMDB \
