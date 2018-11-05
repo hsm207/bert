@@ -252,6 +252,16 @@ class ColaProcessor(DataProcessor):
 class ImdbProcessor(DataProcessor):
   """Processor for the IMDB data set (custom)."""
 
+  def get_train_examples(self, data_dir):
+    """Gets a collection of `InputExample`s for the train set."""
+    return self._create_examples(
+        self._read_tsv(os.path.join(data_dir, "train.tsv"), quotechar='"'), "train")
+
+  def get_dev_examples(self, data_dir):
+    """Gets a collection of `InputExample`s for the dev set."""
+    return self._create_examples(
+        self._read_tsv(os.path.join(data_dir, "dev.tsv"), quotechar='"'), "dev")
+
   def get_labels(self):
     """See base class."""
     return ["0", "1"]
