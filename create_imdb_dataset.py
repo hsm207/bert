@@ -42,4 +42,4 @@ if __name__ == "__main__":
     parser.add_argument("--source", "-s", type=str, default="~/Documents/.data/imdb/aclImdb", help="Source IMDB directory (path to aclImdb)")
     parser.add_argument("--target", "-t", type=str, default="~/.data/glue_data/IMDB", help="Target directory (ex: glue_data/IMDB)")
     args = parser.parse_args()
-    main(*args)
+    main(**vars(args))
