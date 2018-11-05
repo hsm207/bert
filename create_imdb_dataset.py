@@ -23,14 +23,14 @@ def main(source, target):
             for fname in (path / label).glob("*.txt")
         )
         for idx, fname in tqdm(it, desc=f"Loading {path}", ncols=80, position=0):
-            texts.append(fname.read_text(encoding="utf-8"))
+            texts.append(fname.read_text(encoding="utf-8").replace("<br /><br />", "\n"))
             labels.append(idx)
         return pd.DataFrame({"label": labels, "text": texts})
 
     train = get_texts(source / "train")
     test = get_texts(source / "test")
 
-    train, dev = train_test_split(train, test_size=.1, random_state=42)
+    dev, test = train_test_split(test, test_size=.5, random_state=42)
 
     train.to_csv(target / "train.tsv", "\t", index=False)
     dev.to_csv(target / "dev.tsv", "\t", index=False)
@@ -38,4 +38,8 @@ def main(source, target):
 
 
 if __name__ == "__main__":
-    main(source="~/Documents/.data/imdb/aclImdb", target="~/.data/glue_data/IMDB")
+    parser = ArgumentParser()
+    parser.add_argument("--source", "-s", type=str, default="~/Documents/.data/imdb/aclImdb", help="Source IMDB directory (path to aclImdb)")
+    parser.add_argument("--target", "-t", type=str, default="~/.data/glue_data/IMDB", help="Target directory (ex: glue_data/IMDB)")
+    args = parser.parse_args()
+    main(*args)
