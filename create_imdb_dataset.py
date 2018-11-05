@@ -1,16 +1,8 @@
 #!/usr/bin/env python3
 
-from datetime import datetime
-from datetime import time as dt_time
-from datetime import timedelta
+from argparse import ArgumentParser
 from pathlib import Path
-from sys import stderr
-from typing import Dict, Optional
-from zipfile import ZipFile
 
-import attr
-import dateutil.parser
-import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
