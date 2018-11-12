@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BERT_BASE_DIR='checkpoints/uncased_L-12_H-768_A-12'
+BERT_BASE_DIR='/data/checkpoints/uncased_L-12_H-768_A-12'
 # BERT_BASE_DIR='/data/checkpoints/uncased_L-24_H-1024_A-16'
 # DATASETS="$HOME/.data/glue_data"
 DATASETS='/data/datasets'
